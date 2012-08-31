@@ -7,9 +7,9 @@ module Leaks
       attr_reader :runs
     end
 
-    def self.run(path, verbose=false)
+    def self.run(path = 'spec', verbose=false)
       @ram_usage = RAMUsage.new
-      @paths     = Array(path || 'spec')
+      @paths     = Array(path)
       @out       = verbose ? $stdout : nil
       @err       = $stderr
       @runs      = 0
