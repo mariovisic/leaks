@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mario@mariovisic.com"]
   gem.description   = %q{Leaks loops your rpsec tests and monitors process RAM usage to detect any memory leaks. Processes with continiously growing usage could protentially have a leak in them.}
   gem.summary       = %q{Find memory leaks using your rspec tests}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/mariovisic/leaks"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
