@@ -2,11 +2,8 @@ module Leaks
   module Spinner
     @chars = [ '|', '/', '-', '\\' ]
 
-    def self.spin
-      @chars.push @chars.shift
-    end
-
     def self.to_s
+      @chars.push @chars.shift
       @chars[0]
     end
   end

@@ -2,6 +2,11 @@ module Leaks
   class RSpecError < StandardError; end
 
   module Runner
+    class << self
+      attr_reader :ram_usage
+      attr_reader :runs
+    end
+
     def self.run(path, verbose=false)
       @ram_usage = RAMUsage.new
       @paths     = Array(path || 'spec')
@@ -10,31 +15,13 @@ module Leaks
       @runs      = 0
 
       ActiveRecord::Base.logger = nil
-      RSpecRunner.run(@paths, @err, @out)
+      Thread.new { Printer.run }
 
-      Thread.new do
-        loop do
-          sleep 0.1
-          print_status
-        end
-      end
+      RSpecRunner.run(@paths, @err, @out)
 
       loop do
         RSpecRunner.run([], @err, @out)
-
         @runs +=1
-      end
-    end
-
-    def self.print_status
-      print 13.chr
-      print "#{Spinner} "
-      Spinner.spin
-
-      if @ram_usage.increased?
-        print "\033[31m#{@ram_usage} Runs: #{@runs.to_s} \033[0m"
-      else
-        print "\033[32m#{@ram_usage} Runs: #{@runs.to_s} \033[0m"
       end
     end
   end
