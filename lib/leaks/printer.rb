@@ -1,7 +1,11 @@
 module Leaks
   module Printer
     def self.run
-      loop { print_status; sleep 0.1 }
+      loop do
+        Runner.ram_usage.update
+        print_status
+        sleep 0.1
+      end
     end
 
     def self.print_status

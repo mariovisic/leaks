@@ -1,23 +1,29 @@
 module Leaks
   class RAMUsage
     def initialize
-      @previous = kilobytes_used
-      @current  = @previous
-      @stable   = Time.now
+      @previous  = kilobytes_used
+      @current   = @previous
+      @stable    = Time.now
+      @increased = false
     end
 
-    def increased?
-      if current > @previous
-        @stable = Time.now
-        true
-      else
-        false
+    def update
+      @increased = false
+      @previous  = @current
+      @current   = kilobytes_used
+
+      if @current > @previous
+        @increased = true
+        @stable    = Time.now
       end
     end
 
+    def increased?
+      @increased
+    end
+
     def current
-      @previous = @current
-      @current  = kilobytes_used
+      @current
     end
 
     def to_s
