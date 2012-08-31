@@ -15,7 +15,10 @@ module Leaks
       @runs      = 0
       @printer   = Thread.new { Printer.run }
 
-      ActiveRecord::Base.logger = nil
+      if defined?(ActiveRecord::Base)
+        ActiveRecord::Base.logger = nil
+      end
+
       RSpecRunner.run(@paths, @err, @out)
 
       loop do

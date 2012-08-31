@@ -18,5 +18,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
 
-  gem.add_runtime_dependency 'rspec-rails'
+  gem.add_runtime_dependency 'rspec-core', '~> 2.0'
 end
