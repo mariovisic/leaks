@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Leaks::VERSION
   gem.authors       = ["Mario Visic"]
   gem.email         = ["mario@mariovisic.com"]
-  gem.description   = %q{Leaks loops your rpsec tests and monitors process RAM usage to detect any memory leaks. Processes with continiously growing usage could protentially have a laek in them.}
+  gem.description   = %q{Leaks loops your rpsec tests and monitors process RAM usage to detect any memory leaks. Processes with continiously growing usage could protentially have a leak in them.}
   gem.summary       = %q{Find memory leaks using your rspec tests}
   gem.homepage      = ""
 

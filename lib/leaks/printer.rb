@@ -7,7 +7,7 @@ module Leaks
     def self.print_status
       print "#{13.chr}#{Spinner} "
 
-      status = "Runs: #{Runner.runs} #{Runner.ram_usage} Stable: #{Runner.ram_usage.stable_for} sec"
+      status = "Runs: #{Runner.runs} #{Runner.ram_usage} Stable: #{Runner.ram_usage.stable_for} sec    "
 
       if Runner.ram_usage.increased?
         print "\033[31m#{status}\033[0m"
