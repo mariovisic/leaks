@@ -13,10 +13,9 @@ module Leaks
       @out       = verbose ? $stdout : nil
       @err       = $stderr
       @runs      = 0
+      @printer   = Thread.new { Printer.run }
 
       ActiveRecord::Base.logger = nil
-      Thread.new { Printer.run }
-
       RSpecRunner.run(@paths, @err, @out)
 
       loop do

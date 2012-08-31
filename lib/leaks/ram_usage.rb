@@ -3,10 +3,16 @@ module Leaks
     def initialize
       @previous = kilobytes_used
       @current  = @previous
+      @stable   = Time.now
     end
 
     def increased?
-      current > @previous
+      if current > @previous
+        @stable = Time.now
+        true
+      else
+        false
+      end
     end
 
     def current
@@ -16,6 +22,10 @@ module Leaks
 
     def to_s
       "Usage: #{current}KB"
+    end
+
+    def stable_for
+      (Time.now - @stable).to_i
     end
 
     private
