@@ -1,18 +1,18 @@
 module Leaks
   class RAMUsage
     def initialize
-      @previous  = kilobytes_used
-      @current   = @previous
+      @current   = kilobytes_used
+      @highest   = @current
       @stable    = Time.now
       @increased = false
     end
 
     def update
       @increased = false
-      @previous  = @current
       @current   = kilobytes_used
 
-      if @current > @previous
+      if @current > @highest
+        @highest   = @current
         @increased = true
         @stable    = Time.now
       end
@@ -27,7 +27,7 @@ module Leaks
     end
 
     def to_s
-      "Usage: #{current}KB"
+      "Current: #{current}KB Highest: #{@highest}KB"
     end
 
     def stable_for
